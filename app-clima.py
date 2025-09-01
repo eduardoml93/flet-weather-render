@@ -47,9 +47,6 @@ def criar_mapa_html(latitude, longitude, dados_clima):
 # --- APP FLET ---
 def main(page: ft.Page):
     page.title = "App de Previsão do Tempo e Mapa"
-    page.padding = 0
-    page.window_maximized = True   # abre em tela cheia
-    page.bgcolor = ft.Colors.BLACK
 
     # Controles
     cidade_input = ft.TextField(label="Digite o nome da cidade", width=340, text_size=16)
@@ -102,10 +99,20 @@ def main(page: ft.Page):
     page.add(
         ft.Stack(
             [
-                ft.Image(src=BACKGROUND_URL, fit=ft.ImageFit.COVER, expand=True),
-                ft.Container(content=content_card, alignment=ft.alignment.center, expand=True)
+                ft.Container(
+                    content=ft.Image(
+                        src=BACKGROUND_URL,
+                        fit=ft.ImageFit.CONTAIN,
+                        expand=True
+                    ),
+                    expand=True   # <- garante que ocupe 100% da tela
+                ),
+                ft.Container(
+                    content=content_card,
+                    alignment=ft.alignment.center,
+                    expand=True
+                )
             ],
-            expand=True
         )
     )
 
